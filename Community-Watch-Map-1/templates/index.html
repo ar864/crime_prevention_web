@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1>Community-Based Crime Prevention</h1>
+    <p>Together we can make our neighborhood safer. Report incidents and stay informed.</p>
+    <div class="cta-buttons">
+        <a href="{{ url_for('report') }}" class="btn btn-primary">Report a Crime</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">View Dashboard</a>
+    </div>
+</div>
+
+<div class="features">
+    <div class="feature-card">
+        <h3>Report Instantly</h3>
+        <p>Use your current location to quickly report suspicious activities.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Live Map</h3>
+        <p>See crime hotspots in your area with our color-coded map.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Stay Safe</h3>
+        <p>Make informed decisions about your safety based on real-time data.</p>
+    </div>
+</div>
+{% endblock %}

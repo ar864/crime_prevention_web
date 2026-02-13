@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="report-form-container">
+    <h2>Report an Incident</h2>
+    <p>Your location will be automatically detected.</p>
+    
+    <form action="{{ url_for('report') }}" method="POST" id="crimeForm">
+        <div class="form-group">
+            <label for="description">Description of Incident</label>
+            <textarea id="description" name="description" required placeholder="Describe what happened..."></textarea>
+        </div>
+        
+        <input type="hidden" id="latitude" name="latitude">
+        <input type="hidden" id="longitude" name="longitude">
+        
+        <div id="location-status" class="status-message">Detecting location...</div>
+        
+        <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Submit Report</button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const statusDiv = document.getElementById('location-status');
+        const latInput = document.getElementById('latitude');
+        const lngInput = document.getElementById('longitude');
+        const submitBtn = document.getElementById('submitBtn');
+        
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                latInput.value = position.coords.latitude;
+                lngInput.value = position.coords.longitude;
+                statusDiv.textContent = "Location detected: " + position.coords.latitude.toFixed(4) + ", " + position.coords.longitude.toFixed(4);
+                statusDiv.classList.add('success');
+                submitBtn.disabled = false;
+            }, function(error) {
+                statusDiv.textContent = "Error detecting location: " + error.message + ". Please enable location services.";
+                statusDiv.classList.add('error');
+            });
+        } else {
+            statusDiv.textContent = "Geolocation is not supported by this browser.";
+            statusDiv.classList.add('error');
+        }
+    });
+</script>
+{% endblock %}

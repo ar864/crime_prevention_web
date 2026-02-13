@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h2>Crime Hotspot Map</h2>
+    <div class="legend">
+        <div class="legend-item"><span class="dot green"></span> 1 Report</div>
+        <div class="legend-item"><span class="dot yellow"></span> 2 Reports</div>
+        <div class="legend-item"><span class="dot red"></span> 3+ Reports</div>
+    </div>
+</div>
+
+<div id="map"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initMap();
+    });
+</script>
+{% endblock %}
